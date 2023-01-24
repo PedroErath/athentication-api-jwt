@@ -1,10 +1,12 @@
 require('dotenv').config()
+const port = process.env.PORT
 const express = require('express')
 const app = express()
-const port = process.env.PORT
+const UserRouter = require('./Routes/UserRouter')
 
 const mongoose = require('mongoose')
 
+mongoose.set('strictQuery', false)
 mongoose.connect(process.env.MONGO_URL)
     .then(db => {
         console.log('Database connected')
@@ -13,6 +15,6 @@ mongoose.connect(process.env.MONGO_URL)
         console.log(`Error database connected: ${error}`)
     })
 
-app.get('/', (req, res) => res.send('Hello Word'))
+app.use('/', UserRouter)
 
 app.listen(port, () => console.log('Server running in port ' + port))
