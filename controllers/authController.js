@@ -7,21 +7,21 @@ const authController = {
 
         if(!token) return res.status(401).json({
             success: false,
-            msg: 'Authorization token not found'
+            error: 'Authorization token not found'
         })
 
         try {
             const userVerified = jwt.verify(token, process.env.TOKEN_SECRET)
             res.json({
                 success: true,
-                data: userVerified
+                user: userVerified
             })
 
         } catch (error) {
             res.status(401).json({
                 success: false,
                 error: error,
-                msg: 'Authorization token not found'
+                msg: 'Authorization token not valid'
             })
         }
     }

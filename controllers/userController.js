@@ -9,7 +9,7 @@ const UserController = {
         if (selectedUser) {
             return res.status(400).json({
                 success: false,
-                msg: 'E-mail already registered'
+                error: 'E-mail already registered'
             })
         }
 
